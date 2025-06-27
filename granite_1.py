@@ -65,7 +65,7 @@ They raised issues last week that weren’t captured.
 Tom:
 Okay, fine. Invite one rep. Let’s not overcomplicate this."""
 
-iam_token = "eyJraWQiOiIyMDE5MDcyNCIsImFsZyI6IlJTMjU2In0.eyJpYW1faWQiOiJJQk1pZC02OTMwMDBaQjU2IiwiaWQiOiJJQk1pZC02OTMwMDBaQjU2IiwicmVhbG1pZCI6IklCTWlkIiwianRpIjoiNmQ0ZDZiMGYtN2I3Yi00YjEyLWJhMjctNzExNTI0MzNhMDJjIiwiaWRlbnRpZmllciI6IjY5MzAwMFpCNTYiLCJnaXZlbl9uYW1lIjoiU2FtYXJ0aCIsImZhbWlseV9uYW1lIjoiSmFpbiIsIm5hbWUiOiJTYW1hcnRoIEphaW4iLCJlbWFpbCI6InNhbWFydGhqMjA0QGdtYWlsLmNvbSIsInN1YiI6InNhbWFydGhqMjA0QGdtYWlsLmNvbSIsImF1dGhuIjp7InN1YiI6InNhbWFydGhqMjA0QGdtYWlsLmNvbSIsImlhbV9pZCI6IklCTWlkLTY5MzAwMFpCNTYiLCJuYW1lIjoiU2FtYXJ0aCBKYWluIiwiZ2l2ZW5fbmFtZSI6IlNhbWFydGgiLCJmYW1pbHlfbmFtZSI6IkphaW4iLCJlbWFpbCI6InNhbWFydGhqMjA0QGdtYWlsLmNvbSJ9LCJhY2NvdW50Ijp7InZhbGlkIjp0cnVlLCJic3MiOiJlOTUzZDEwYzg1Yzk0MjIyOGMyYTMyNDQ0ZDkyZjAxNyIsImltc191c2VyX2lkIjoiMTM4OTkxNzciLCJmcm96ZW4iOnRydWUsImltcyI6IjI5OTg2NzQifSwibWZhIjp7ImltcyI6dHJ1ZX0sImlhdCI6MTc1MDk2NTE5MiwiZXhwIjoxNzUwOTY4NzkyLCJpc3MiOiJodHRwczovL2lhbS5jbG91ZC5pYm0uY29tL2lkZW50aXR5IiwiZ3JhbnRfdHlwZSI6InVybjppYm06cGFyYW1zOm9hdXRoOmdyYW50LXR5cGU6YXBpa2V5Iiwic2NvcGUiOiJpYm0gb3BlbmlkIiwiY2xpZW50X2lkIjoiZGVmYXVsdCIsImFjciI6MSwiYW1yIjpbInB3ZCJdfQ.j9UKwqel9PDl4QKSZoZKy8koCYAfH7LYv6cQhzI_wq6uyEDwDk11Vt40HURL9G_JUgAR4qEQ8HZCAEjNHoXf5S-I1Z8ov_KtkiyBoD_N3to_PU7YEqPOSrk8CagDInkwoY9RBWYfpIvf8ZBLnMu0sZJkI2Ku1Ow6MmVC--M_N5uxWz_WUeZ5qpQMpE3u6o8dlm8HTBXZYRXR6uR7gGAgsjzeflByvLV5sFFxJVkPRSV5rhIT7UlwdCO0X6JyM7PrAfcwQkyp-zhbpfqXsSFrRUwDwgLkIz_wZfWIX5KWtqsNztSthbuEWoO2TGOH0x1hlnuWk98D-ejRtGU2IV6THA"
+iam_token = "eyJraWQiOiIyMDE5MDcyNCIsImFsZyI6IlJTMjU2In0.eyJpYW1faWQiOiJJQk1pZC02OTMwMDBaQjU2IiwiaWQiOiJJQk1pZC02OTMwMDBaQjU2IiwicmVhbG1pZCI6IklCTWlkIiwianRpIjoiMGU3YzJjMmQtNTdlMy00MjBiLTlkODUtMzA1M2IyZWQ5Mzg3IiwiaWRlbnRpZmllciI6IjY5MzAwMFpCNTYiLCJnaXZlbl9uYW1lIjoiU2FtYXJ0aCIsImZhbWlseV9uYW1lIjoiSmFpbiIsIm5hbWUiOiJTYW1hcnRoIEphaW4iLCJlbWFpbCI6InNhbWFydGhqMjA0QGdtYWlsLmNvbSIsInN1YiI6InNhbWFydGhqMjA0QGdtYWlsLmNvbSIsImF1dGhuIjp7InN1YiI6InNhbWFydGhqMjA0QGdtYWlsLmNvbSIsImlhbV9pZCI6IklCTWlkLTY5MzAwMFpCNTYiLCJuYW1lIjoiU2FtYXJ0aCBKYWluIiwiZ2l2ZW5fbmFtZSI6IlNhbWFydGgiLCJmYW1pbHlfbmFtZSI6IkphaW4iLCJlbWFpbCI6InNhbWFydGhqMjA0QGdtYWlsLmNvbSJ9LCJhY2NvdW50Ijp7InZhbGlkIjp0cnVlLCJic3MiOiJlOTUzZDEwYzg1Yzk0MjIyOGMyYTMyNDQ0ZDkyZjAxNyIsImltc191c2VyX2lkIjoiMTM4OTkxNzciLCJmcm96ZW4iOnRydWUsImltcyI6IjI5OTg2NzQifSwibWZhIjp7ImltcyI6dHJ1ZX0sImlhdCI6MTc1MTA0Mjc1OSwiZXhwIjoxNzUxMDQ2MzU5LCJpc3MiOiJodHRwczovL2lhbS5jbG91ZC5pYm0uY29tL2lkZW50aXR5IiwiZ3JhbnRfdHlwZSI6InVybjppYm06cGFyYW1zOm9hdXRoOmdyYW50LXR5cGU6YXBpa2V5Iiwic2NvcGUiOiJpYm0gb3BlbmlkIiwiY2xpZW50X2lkIjoiZGVmYXVsdCIsImFjciI6MSwiYW1yIjpbInB3ZCJdfQ.Q69Sw3E-quoTKGYpKkSPzPVRNqk-U3G6NSzPXkKAky6k5RPzZiFKSZaQuTUeCOXfs_tkmG80SjqefDdPqbe9WeyT98BZMwedh9767m795B8feCBJp5RR_tZQcZVz-3lhq_RDTHCc615Pq__-QwLoVJPTDq69dk77kJ5rRM8kDfdGIGhwJbxbCDppdAU3YLGw_Df9d_xE7ci7suTDmyo_y07_qFEGls4gCl9E7IW7q7lNol4h-qVbulcNZuHpGji8ZnGnUJoRbMnEtguXsr3sAxl4fTChIxiI3zJrgZfOMTCLzFPo8F1bwHHQ4JFpsXQTepyGbcDbtlmhEU_Xu3MvJg"
 os.environ["IBM_API_KEY"] = iam_token
 agent_goal = """
 Analyze the provided meeting transcript. Generate:
@@ -259,81 +259,152 @@ Analyze the provided meeting transcript. Generate:
 #         raise Exception("Non-200 response: " + str(response.text))
 
 #     return response.json()
-llm = ChatModel.from_name("watsonx:ibm/granite-3-3-8b-instruct",
-                          project_id="7a900cc3-a751-426f-881d-eb923da89638", 
-                          api_key=iam_token )
+# llm = ChatModel.from_name("watsonx:ibm/granite-3-3-8b-instruct",
+#                           project_id="7a900cc3-a751-426f-881d-eb923da89638", 
+#                           api_key=iam_token )
 
 
 
 
-workflow = AgentWorkflow(name="Meeting Transcript Analyzer")
-workflow.add_agent(
-    name="Summarizer",
-    role="A concise summarizer.",
-    instructions="Summarize the transcript in 5 clear bullet points.",
-    llm=llm
-)
-
-
-workflow.add_agent(
-    name="TaskExtractor",
-    role="Task extraction agent.",
-    instructions=""""
-From the transcript, extract tasks in JSON format:
-[
-  {"task": "...", "person": "...", "due_date": "..."},
-  ...
-]
-""",
-    
-    llm=llm
-)
-
-
-workflow.add_agent(
-    name="ToneAnalyzer",
-    role="Ethics and tone evaluator.",
-    instructions="""
-        Evaluate tone and collaboration dynamics. Highlight inclusion, transparency, respect.
-        Also identify exclusion, opacity, or disrespect with quotes and short explanations.
-    """,
-    llm=llm
-)
-
-
-workflow.add_agent(
-    name="CultureScorer",
-    role="Culture rating assistant.",
-    instructions="""
-        Score the team on: Inclusivity, Respect, Collaboration, Psychological Safety (1-5).
-        Give short explanations and an overall verdict.
-    """,
-    llm=llm
-)
+# workflow = AgentWorkflow(name="Meeting Transcript Analyzer")
+# workflow.add_agent(
+#     name="Summarizer",
+#     role="A concise summarizer.",
+#     instructions="Summarize the transcript in 5 clear bullet points.",
+#     llm=llm
+# )
 
 
 # workflow.add_agent(
-#     name="TaskScheduler",
-#     role="Calendar automation assistant.",
-#     instructions="""
-#         Take the previously extracted tasks and create events in Google Calendar (if due dates present).
-#         If not possible, suggest fallback like Jira or Notion.
-#     """,
-#     tools=[GoogleCalendarTool()],
+#     name="TaskExtractor",
+#     role="Task extraction agent.",
+#     instructions=""""
+# From the transcript, extract tasks in JSON format:
+# [
+#   {"task": "...", "person": "...", "due_date": "..."},
+#   ...
+# ]
+# """,
+    
 #     llm=llm
 # )
-transcript = transcipt
-inputs = [
-    AgentWorkflowInput(prompt=f"Summarize this transcript:\n{transcript}"),
-    AgentWorkflowInput(prompt=f"Extract tasks from this transcript:\n{transcript}"),
-    AgentWorkflowInput(prompt=f"Analyze tone and collaboration in this transcript:\n{transcript}"),
-    AgentWorkflowInput(prompt=f"Score team culture based on this transcript:\n{transcript}"),
-    #AgentWorkflowInput(prompt="Use the extracted tasks to schedule calendar events.")
-]
 
-response = workflow.run(inputs).on(
-    "success", lambda data, event: print(f"\n✅ Step '{data.step}' completed.\n{data.state.final_answer}")
-)
-first_task = response._tasks[0]
-print("=== Final Result ===")
-print(first_task)
+
+# workflow.add_agent(
+#     name="ToneAnalyzer",
+#     role="Ethics and tone evaluator.",
+#     instructions="""
+#         Evaluate tone and collaboration dynamics. Highlight inclusion, transparency, respect.
+#         Also identify exclusion, opacity, or disrespect with quotes and short explanations.
+#     """,
+#     llm=llm
+# )
+
+
+# workflow.add_agent(
+#     name="CultureScorer",
+#     role="Culture rating assistant.",
+#     instructions="""
+#         Score the team on: Inclusivity, Respect, Collaboration, Psychological Safety (1-5).
+#         Give short explanations and an overall verdict.
+#     """,
+#     llm=llm
+# )
+
+
+# # workflow.add_agent(
+# #     name="TaskScheduler",
+# #     role="Calendar automation assistant.",
+# #     instructions="""
+# #         Take the previously extracted tasks and create events in Google Calendar (if due dates present).
+# #         If not possible, suggest fallback like Jira or Notion.
+# #     """,
+# #     tools=[GoogleCalendarTool()],
+# #     llm=llm
+# # )
+# transcript = transcipt
+# inputs = [
+#     AgentWorkflowInput(prompt=f"Summarize this transcript:\n{transcript}"),
+#     AgentWorkflowInput(prompt=f"Extract tasks from this transcript:\n{transcript}"),
+#     AgentWorkflowInput(prompt=f"Analyze tone and collaboration in this transcript:\n{transcript}"),
+#     AgentWorkflowInput(prompt=f"Score team culture based on this transcript:\n{transcript}"),
+#     #AgentWorkflowInput(prompt="Use the extracted tasks to schedule calendar events.")
+# ]
+
+# response = workflow.run(inputs).on(
+#     "success", lambda data, event: print(f"\n✅ Step '{data.step}' completed.\n{data.state.final_answer}")
+# )
+# # print("\n=== 🧠 Final Results from All Agents ===")
+# # for step_name, result_list in response._tasks:
+# #     print(f"\n📌 Agent: {step_name}")
+# #     for result in result_list:
+# #         print("📝 Output:")
+# #         print(result)  # 
+# run = await workflow.run(inputs)
+
+# # Iterate and print results
+# print("\n=== 🧠 Final Results from All Agents ===")
+# for task in run._tasks:
+#     print(f"\n📌 Agent: {task.step}")
+#     print("📝 Output:")
+#     print(task.state.final_answer)  #
+transcript = transcipt
+async def main():
+    llm = ChatModel.from_name(
+        "watsonx:ibm/granite-3-3-8b-instruct",
+        project_id="your_project_id_here",
+        api_key=os.environ["IBM_API_KEY"]
+    )
+
+    workflow = AgentWorkflow(name="Meeting Transcript Analyzer")
+
+    workflow.add_agent(
+        name="Summarizer",
+        role="Summarizes meeting",
+        instructions="Summarize the transcript in 5 bullet points.",
+        llm=llm
+    )
+
+    workflow.add_agent(
+        name="TaskExtractor",
+        role="Extracts tasks",
+        instructions="""From the transcript, extract tasks in JSON format with task, person, due_date.""",
+        llm=llm
+    )
+
+    workflow.add_agent(
+        name="ToneAnalyzer",
+        role="Analyzes tone",
+        instructions="Evaluate tone and highlight inclusion, respect, or negativity.",
+        llm=llm
+    )
+
+    workflow.add_agent(
+        name="CultureScorer",
+        role="Rates team culture",
+        instructions="Score Inclusivity, Respect, Collaboration, Psychological Safety (1–5) with reasons and final verdict.",
+        llm=llm
+    )
+
+    # Define inputs
+    inputs = [
+        AgentWorkflowInput(prompt=f"Summarize this:\n{transcript}"),
+        AgentWorkflowInput(prompt=f"Extract tasks:\n{transcript}"),
+        AgentWorkflowInput(prompt=f"Evaluate tone:\n{transcript}"),
+        AgentWorkflowInput(prompt=f"Rate team culture:\n{transcript}")
+    ]
+
+    # Run the workflow
+    run = await workflow.run(inputs)
+
+    # Print the outputs
+    print("\n=== 🧠 Final Results from All Agents ===")
+    for task in run._tasks:
+        print(f"\n📌 Agent: {task.step}")
+        print("📝 Output:")
+        print(task.state.final_answer)
+
+# Run the async function
+if __name__ == "__main__":
+    asyncio.run(main())
+
