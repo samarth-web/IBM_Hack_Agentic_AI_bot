@@ -78,56 +78,7 @@ Analyze the provided meeting transcript. Generate:
 
 
 transcript = transcipt
-# async def main():
-#     llm = ChatModel.from_name(
-#         "watsonx:ibm/granite-3-3-8b-instruct",
-#         project_id="7a900cc3-a751-426f-881d-eb923da89638",
-#         api_key=os.environ["IBM_API_KEY"]
-#     )
 
-#     workflow = AgentWorkflow(name="Meeting Transcript Analyzer")
-
-#     workflow.add_agent(
-#         name="Summarizer",
-#         role="Summarizes meeting",
-#         instructions="Summarize the transcript in 5 bullet points.",
-#         llm=llm
-#     )
-
-#     workflow.add_agent(
-#         name="TaskExtractor",
-#         role="Extracts tasks",
-#         instructions="""From the transcript, extract tasks in JSON format with task, person, due_date.""",
-#         llm=llm
-#     )
-
-#     workflow.add_agent(
-#         name="ToneAnalyzer",
-#         role="Analyzes tone",
-#         instructions="Evaluate tone and highlight inclusion, respect, or negativity.",
-#         llm=llm
-#     )
-
-#     workflow.add_agent(
-#         name="CultureScorer",
-#         role="Rates team culture",
-#         instructions="Score Inclusivity, Respect, Collaboration, Psychological Safety (1–5) with reasons and final verdict.",
-#         llm=llm
-#     )
-
-
-#     input_text = f"{transcript}"
-#     run = await workflow.run([AgentWorkflowInput(prompt=input_text)])
-
-#     print(run.result)
-#     print("######")
-#     for agent_name, output in run.result:
-#         print(f"\n📌 Agent: {agent_name}")
-#         print("📝 Output:")
-#         print(output)
-
-# if __name__ == "__main__":
-#     asyncio.run(main())
 async def run_agent(agent_name, role, instructions, transcript, llm):
     workflow = AgentWorkflow(name=f"{agent_name} Workflow")
     workflow.add_agent(
@@ -137,9 +88,9 @@ async def run_agent(agent_name, role, instructions, transcript, llm):
         llm=llm
     )
     result = await workflow.run([AgentWorkflowInput(prompt=transcript)])
-    return result.result.final_answer  # safest for single-agent runs
+    return result.result.final_answer  
 
-# === MAIN ===
+
 async def main():
     llm = ChatModel.from_name(
         "watsonx:ibm/granite-3-3-8b-instruct",
@@ -147,7 +98,7 @@ async def main():
         api_key=os.environ["IBM_API_KEY"]
     )
 
-    # Run each agent one-by-one
+    
     summary = await run_agent(
         "Summarizer", "Summarizes meeting", 
         "Summarize the transcript in 5 bullet points.", transcript, llm
@@ -169,13 +120,13 @@ async def main():
     )
 
     print("\n=== FINAL AGENT OUTPUTS ===")
-    print("\n📌 Summary:\n", summary)
-    print("\n📌 Tasks:\n", tasks)
-    print("\n📌 Tone Analysis:\n", tone)
-    print("\n📌 Culture Score:\n", culture)
+    print("\n Summary:\n", summary)
+    print("\n Tasks:\n", tasks)
+    print("\n Tone Analysis:\n", tone)
+    print("\n Culture Score:\n", culture)
 
     try:
-     await llm.client.aclose()  # This explicitly closes the underlying HTTP session
+     await llm.client.aclose()  
     except Exception as e:
         print(f"Warning while closing session: {e}")
 # === ENTRY POINT ===
