@@ -79,6 +79,21 @@ Analyze the provided meeting transcript. Generate:
 
 transcript = transcipt
 
+SLACK_WEBHOOK_URL = "https://hooks.slack.com/services/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"
+
+def send_slack_message(text):
+    payload = {
+        "text": text
+    }
+    response = requests.post(SLACK_WEBHOOK_URL, json=payload)
+
+    if response.status_code == 200:
+        print("✅ Sent Slack message")
+    else:
+        print(f" Slack error: {response.status_code} {response.text}")
+
+
+
 async def run_agent(agent_name, role, instructions, transcript, llm):
     workflow = AgentWorkflow(name=f"{agent_name} Workflow")
     workflow.add_agent(
@@ -107,6 +122,7 @@ async def main():
     tasks = await run_agent(
         "TaskExtractor", "Extracts tasks", 
         "From the transcript, extract tasks in JSON format with task, person, due_date.", transcript, llm
+        
     )
     
     tone = await run_agent(
@@ -124,6 +140,8 @@ async def main():
     print("\n Tasks:\n", tasks)
     print("\n Tone Analysis:\n", tone)
     print("\n Culture Score:\n", culture)
+    task_summary = "Trello card created: Finalize Product Launch Timeline"
+    send_slack_message(tasks)        
 
     try:
      await llm.client.aclose()  
