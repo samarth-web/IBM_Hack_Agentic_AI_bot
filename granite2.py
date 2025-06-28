@@ -240,9 +240,33 @@ async def main():
     )
     
     culture = await run_agent(
-        "CultureScorer", "Rates team culture",
-        "Score Inclusivity, Respect, Collaboration, Psychological Safety (1–5) with reasons and final verdict." "Provide 2-3 specific, practical recommendations for how the team could improve its weakest areas.", transcript, llm
-    )
+    "CultureScorer",
+    "Rates team culture",
+    (
+        "You are an AI that ONLY returns valid JSON. No intro, no explanation.\n"
+        "Read the meeting transcript and score the team on these 4 culture pillars: Inclusivity, Respect, Collaboration, Psychological_Safety.\n"
+        "Each must be an integer from 1 to 5.\n"
+        "Also add a short 'Verdict' string and a 'Recommendations' list with 2–3 practical actions.\n\n"
+        "STRICT FORMAT:\n"
+        "{\n"
+        "  \"Inclusivity\": 2,\n"
+        "  \"Respect\": 2,\n"
+        "  \"Collaboration\": 2,\n"
+        "  \"Psychological_Safety\": 1,\n"
+        "  \"Verdict\": \"Short verdict sentence.\",\n"
+        "  \"Recommendations\": [\n"
+        "    \"Action 1.\",\n"
+        "    \"Action 2.\",\n"
+        "    \"Action 3.\"\n"
+        "  ]\n"
+        "}\n"
+        "⚡ If you’re unsure, return: {} — do not explain anything."
+    ),
+    transcript,
+    llm
+)
+
+
 
     ethics = await run_agent(
         "EthicsChecker",
@@ -288,8 +312,6 @@ async def main():
     print("\n Tone Analysis:\n", tone)
     print("\n Culture Score:\n", culture)
     print("\n=== Ethics Check ===\n", ethics)
-    culture_data = json.loads(culture)
-
     def extract_json_array(text):
        
         match = re.search(r'\[.*\]', text, re.DOTALL)
@@ -297,6 +319,76 @@ async def main():
             return match.group(0)
         else:
             return '[]'  
+    def extract_json_object(text):
+        print("\n=== RAW CULTURE OUTPUT ===")
+        print(repr(text))
+
+        # Replace smart quotes
+        text = text.replace('“', '"').replace('”', '"').replace("‘", "'").replace("’", "'")
+
+        # Remove code fences if they slip in
+        text = text.strip().strip('`').strip('json').strip()
+
+        # Extract JSON object
+        match = re.search(r'\{[\s\S]*\}', text)
+        if match:
+            try:
+                return json.loads(match.group(0))
+            except json.JSONDecodeError as e:
+                print("❌ JSON decoding failed:", e)
+                return {}
+        else:
+            print("❌ No JSON object found. Returning empty dict.")
+            return {}
+ 
+    culture_data = extract_json_object(culture)
+    print("\nParsed Culture JSON:", culture_data)
+    categories = ["Inclusivity", "Respect", "Collaboration", "Psychological Safety"]
+    categories = ["Inclusivity", "Respect", "Collaboration", "Psychological Safety"]
+    scores = [
+        culture_data.get("Inclusivity", 0),
+        culture_data.get("Respect", 0),
+        culture_data.get("Collaboration", 0),
+        culture_data.get("Psychological_Safety", 0)
+    ]
+
+    # Close the loop on radar chart
+    scores += [scores[0]]  # Radar needs first point repeated to close the shape
+    categories += [categories[0]]
+
+    # Build the radar chart
+    fig = go.Figure()
+
+    fig.add_trace(go.Scatterpolar(
+        r=scores,
+        theta=categories,
+        fill='toself',
+        name='Culture Scores',
+        hovertemplate='%{theta}: %{r}/5'
+    ))
+
+    fig.update_layout(
+        polar=dict(
+            radialaxis=dict(
+                visible=True,
+                range=[0, 5]
+            )
+        ),
+        showlegend=False,
+        title="Team Culture Score Radar Chart"
+    )
+
+    # Save the interactive HTML
+    fig.write_html("culture_score.html")
+    print("Interactive Culture Score saved: culture_score.html")
+
+    # ✅ Optional: print recommendations for your site text
+    print("\nVerdict:", culture_data.get("Verdict", ""))
+    print("\nRecommendations:")
+    for rec in culture_data.get("Recommendations", []):
+        print("-", rec)
+
+    
     try:
         tasks_json_str = extract_json_array(tasks)
         tasks_list = json.loads(tasks_json_str)
@@ -305,40 +397,40 @@ async def main():
         tasks_list = []
 
    
-    # list_id = get_list_id(BOARD_ID, LIST_NAME)
-    # if list_id:
-    #     for task in tasks_list:
-    #         summary = task["task"]
-    #         desc = f"Owner: {task['person']}, Due: {task['due_date']}"
-    #         create_trello_card(list_id, summary, desc)
-    # else:
-    #     print(" Could not find Trello list.")
-    # if tasks_list:
-    #     slack_text = "*Tasks Extracted:*\n"
-    #     for t in tasks_list:
-    #         slack_text += f"- {t['task']} (Owner: {t['person']}, Due: {t['due_date']})\n"
-    # else:
-    #     slack_text = " No tasks extracted."
-    # send_slack_message(slack_text)  
+    list_id = get_list_id(BOARD_ID, LIST_NAME)
+    if list_id:
+        for task in tasks_list:
+            summary = task["task"]
+            desc = f"Owner: {task['person']}, Due: {task['due_date']}"
+            create_trello_card(list_id, summary, desc)
+    else:
+        print(" Could not find Trello list.")
+    if tasks_list:
+        slack_text = "*Tasks Extracted:*\n"
+        for t in tasks_list:
+            slack_text += f"- {t['task']} (Owner: {t['person']}, Due: {t['due_date']})\n"
+    else:
+        slack_text = " No tasks extracted."
+    send_slack_message(slack_text)  
     
-    # for task in tasks_list:
-    #     summary = f"{task['task']} — {task['person']}"
-    #     due = task['due_date']
-    #     create_event(summary, due)
-    #print("sentimental_chunks: ", sentiment_chunks)
+    for task in tasks_list:
+        summary = f"{task['task']} — {task['person']}"
+        due = task['due_date']
+        create_event(summary, due)
+    print("sentimental_chunks: ", sentiment_chunks)
     chunks = extract_sentiments(sentiment_chunks)
-    scores = [c["sentiment"] for c in chunks]
+    scores_1 = [c["sentiment"] for c in chunks]
     ids = [c["chunk_id"] for c in chunks]
     person = [c["speaker"]for c in chunks]
 
-    # plt.plot(ids, scores, marker='o')
-    # plt.title("Meeting Sentiment Timeline")
-    # plt.xlabel("Chunk")
-    # plt.ylabel("Sentiment Score")
-    # plt.ylim(-1, 1)
-    # plt.grid(True)
-    # plt.savefig("sentiment_timeline.png")
-    # print("Sentiment timeline chart saved: sentiment_timeline.png")
+    plt.plot(ids, scores_1, marker='o')
+    plt.title("Meeting Sentiment Timeline")
+    plt.xlabel("Chunk")
+    plt.ylabel("Sentiment Score")
+    plt.ylim(-1, 1)
+    plt.grid(True)
+    plt.savefig("sentiment_timeline.png")
+    print("Sentiment timeline chart saved: sentiment_timeline.png")
     
 
     fig = go.Figure()
@@ -349,7 +441,7 @@ async def main():
 
     fig.add_trace(go.Scatter(
         x=ids,
-        y=scores,
+        y=scores_1,
         mode='lines+markers',
         marker=dict(size=10),
         text=hover_text, 
@@ -368,13 +460,9 @@ async def main():
     fig.write_html("sentiment_timeline.html")
     print("Interactive chart saved as sentiment_timeline.html")
 
-    try:
-     await llm.client.aclose()  
-    except Exception as e:
-        print(f"Warning while closing session: {e}")
-    
+   
 
-# === ENTRY POINT ===
+ 
 if __name__ == "__main__":
     asyncio.run(main())
 
