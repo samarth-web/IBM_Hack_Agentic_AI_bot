@@ -1,3 +1,5 @@
+from dotenv import load_dotenv
+load_dotenv()
 import json
 import re
 import requests
@@ -77,8 +79,7 @@ They raised issues last week that weren’t captured.
 Tom:
 Okay, fine. Invite one rep. Let’s not overcomplicate this."""
 
-iam_token = "eyJraWQiOiIyMDE5MDcyNCIsImFsZyI6IlJTMjU2In0.eyJpYW1faWQiOiJJQk1pZC02OTMwMDBaQjU2IiwiaWQiOiJJQk1pZC02OTMwMDBaQjU2IiwicmVhbG1pZCI6IklCTWlkIiwianRpIjoiMGU3YzJjMmQtNTdlMy00MjBiLTlkODUtMzA1M2IyZWQ5Mzg3IiwiaWRlbnRpZmllciI6IjY5MzAwMFpCNTYiLCJnaXZlbl9uYW1lIjoiU2FtYXJ0aCIsImZhbWlseV9uYW1lIjoiSmFpbiIsIm5hbWUiOiJTYW1hcnRoIEphaW4iLCJlbWFpbCI6InNhbWFydGhqMjA0QGdtYWlsLmNvbSIsInN1YiI6InNhbWFydGhqMjA0QGdtYWlsLmNvbSIsImF1dGhuIjp7InN1YiI6InNhbWFydGhqMjA0QGdtYWlsLmNvbSIsImlhbV9pZCI6IklCTWlkLTY5MzAwMFpCNTYiLCJuYW1lIjoiU2FtYXJ0aCBKYWluIiwiZ2l2ZW5fbmFtZSI6IlNhbWFydGgiLCJmYW1pbHlfbmFtZSI6IkphaW4iLCJlbWFpbCI6InNhbWFydGhqMjA0QGdtYWlsLmNvbSJ9LCJhY2NvdW50Ijp7InZhbGlkIjp0cnVlLCJic3MiOiJlOTUzZDEwYzg1Yzk0MjIyOGMyYTMyNDQ0ZDkyZjAxNyIsImltc191c2VyX2lkIjoiMTM4OTkxNzciLCJmcm96ZW4iOnRydWUsImltcyI6IjI5OTg2NzQifSwibWZhIjp7ImltcyI6dHJ1ZX0sImlhdCI6MTc1MTA0Mjc1OSwiZXhwIjoxNzUxMDQ2MzU5LCJpc3MiOiJodHRwczovL2lhbS5jbG91ZC5pYm0uY29tL2lkZW50aXR5IiwiZ3JhbnRfdHlwZSI6InVybjppYm06cGFyYW1zOm9hdXRoOmdyYW50LXR5cGU6YXBpa2V5Iiwic2NvcGUiOiJpYm0gb3BlbmlkIiwiY2xpZW50X2lkIjoiZGVmYXVsdCIsImFjciI6MSwiYW1yIjpbInB3ZCJdfQ.Q69Sw3E-quoTKGYpKkSPzPVRNqk-U3G6NSzPXkKAky6k5RPzZiFKSZaQuTUeCOXfs_tkmG80SjqefDdPqbe9WeyT98BZMwedh9767m795B8feCBJp5RR_tZQcZVz-3lhq_RDTHCc615Pq__-QwLoVJPTDq69dk77kJ5rRM8kDfdGIGhwJbxbCDppdAU3YLGw_Df9d_xE7ci7suTDmyo_y07_qFEGls4gCl9E7IW7q7lNol4h-qVbulcNZuHpGji8ZnGnUJoRbMnEtguXsr3sAxl4fTChIxiI3zJrgZfOMTCLzFPo8F1bwHHQ4JFpsXQTepyGbcDbtlmhEU_Xu3MvJg"
-os.environ["IBM_API_KEY"] = "tj2HifWLSjTPrAyxgL8SLh5m4QKC2Tm6qk1xbLDHgw0L"
+
 agent_goal = """
 Analyze the provided meeting transcript. Generate:
 1. A summary in bullet points
@@ -90,14 +91,19 @@ Analyze the provided meeting transcript. Generate:
 
 
 transcript = transcipt
+iam_token = os.environ["IAM_TOKEN"]
+os.environ["IBM_API_KEY"] = os.environ["IBM_API_KEY"]
 
-SLACK_WEBHOOK_URL = "https://hooks.slack.com/services/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"
+SLACK_WEBHOOK_URL = os.environ["SLACK_WEBHOOK_URL"]
 
-API_KEY = "98ba5fac32841e02dc31ce69994ceefb"
-TOKEN = "ATTA3de43fcdffa9256748f9cb858565555175358f99eeebfd2312e56796866467fd79DAD6BF"
-BOARD_ID = "HU04NoGx"
-LIST_NAME = "To Do"
-SCOPES = ['https://www.googleapis.com/auth/calendar.events']
+API_KEY = os.environ["TRELLO_API_KEY"]
+TOKEN = os.environ["TRELLO_TOKEN"]
+BOARD_ID = os.environ["BOARD_ID"]
+LIST_NAME = os.environ["LIST_NAME"]
+
+SCOPES = [os.environ["GOOGLE_SCOPES"]]
+
+
 
 
 def extract_sentiments(json_str):
